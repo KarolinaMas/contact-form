@@ -2,6 +2,10 @@
 
 @import "tailwindcss";
 
+@theme {
+  --color-green-600: #0c7d69;
+}
+
 body {
   background-color: #e0f1e8;
   padding: 2rem 1rem;

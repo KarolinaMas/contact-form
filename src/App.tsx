@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import clsx from "clsx";
 
 type ContactFormType = {
   firstName: string;
@@ -10,7 +11,13 @@ type ContactFormType = {
 };
 
 const App = () => {
-  const { register, handleSubmit } = useForm<ContactFormType>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ContactFormType>();
+
+  console.log(errors);
 
   const onSubmit = (formData: ContactFormType) => console.log(formData);
 
@@ -23,15 +30,21 @@ const App = () => {
         className="flex flex-col gap-6 leading-[150%]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 outline-0">
           <label className="flex gap-2">
             First Name <span className="text-green-600">*</span>
           </label>
           <input
             type="text"
-            {...register("firstName")}
-            className="border border-[#86A2A5] px-6 py-3 rounded-lg"
+            {...register("firstName", { required: "This field is required" })}
+            className={clsx(
+              "border border-[#86A2A5] px-6 py-3 rounded-lg outline-none",
+              errors.firstName?.message && "border-error-red"
+            )}
           />
+          {errors.firstName?.message && (
+            <p className="text-error-red">{errors.firstName.message}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <label className="flex gap-2">
@@ -39,9 +52,14 @@ const App = () => {
           </label>
           <input
             type="text"
-            {...register("lastName")}
-            className="border border-[#86A2A5] px-6 py-3 rounded-lg"
+            {...register("lastName", {
+              required: "This field is required",
+            })}
+            className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
           />
+          {errors.lastName?.message && (
+            <p className="text-error-red">{errors.lastName.message}</p>
+          )}
         </div>
         <div className="flex flex-col gap-2">
           <label className="flex gap-2">
@@ -49,8 +67,8 @@ const App = () => {
           </label>
           <input
             type="email"
-            {...register("email")}
-            className="border border-[#86A2A5] px-6 py-3 rounded-lg"
+            {...register("email", { required: "This field is required" })}
+            className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -62,7 +80,9 @@ const App = () => {
             <input
               type="radio"
               value="generalEnquiry"
-              {...register("queryType", { required: true })}
+              {...register("queryType", {
+                required: "Please select a query type",
+              })}
               className="peer hidden"
             />
             <div className="w-5 h-5 rounded-full border-2 border-[#86A2A5]"></div>
@@ -73,7 +93,9 @@ const App = () => {
             <input
               type="radio"
               value="supportRequest"
-              {...register("queryType", { required: true })}
+              {...register("queryType", {
+                required: "Please select a query type",
+              })}
               className="peer hidden"
             />
             <div className="w-5 h-5 rounded-full border-2 border-[#86A2A5]"></div>
@@ -86,14 +108,20 @@ const App = () => {
               Message <span className="text-green-600">*</span>
             </label>
             <textarea
-              className="resize-none border border-[#86A2A5] rounded-lg h-60 px-6 py-3"
-              {...register("message")}
+              className="resize-none border border-[#86A2A5] rounded-lg h-60 px-6 py-3 outline-none"
+              {...register("message", { required: "This field is required" })}
             ></textarea>
+            {errors.message?.message && (
+              <p className="text-error-red">{errors.message.message}</p>
+            )}
           </div>
           <label className="flex items-center gap-4 pr-5 cursor-pointer">
             <input
               type="checkbox"
-              {...register("agreement")}
+              {...register("agreement", {
+                required:
+                  "To submit this form, please consent to being contacted",
+              })}
               className="peer hidden"
             />
             <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center border-2 border-[#86A2A5] rounded-xs"></div>
@@ -103,7 +131,7 @@ const App = () => {
             </p>
           </label>
           <button
-            className="text-white font-bold text-lg bg-green-600 py-4 rounded-lg"
+            className="text-white font-bold text-lg bg-green-600 py-4 rounded-lg cursor-pointer"
             type="submit"
           >
             Submit

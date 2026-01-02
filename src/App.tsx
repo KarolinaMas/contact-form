@@ -39,10 +39,10 @@ const App = () => {
             {...register("firstName", { required: "This field is required" })}
             className={clsx(
               "border border-[#86A2A5] px-6 py-3 rounded-lg outline-none",
-              errors.firstName?.message && "border-error-red"
+              errors.firstName && "border-error-red"
             )}
           />
-          {errors.firstName?.message && (
+          {errors.firstName && (
             <p className="text-error-red">{errors.firstName.message}</p>
           )}
         </div>
@@ -57,7 +57,7 @@ const App = () => {
             })}
             className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
           />
-          {errors.lastName?.message && (
+          {errors.lastName && (
             <p className="text-error-red">{errors.lastName.message}</p>
           )}
         </div>
@@ -67,9 +67,18 @@ const App = () => {
           </label>
           <input
             type="email"
-            {...register("email", { required: "This field is required" })}
+            {...register("email", {
+              required: "This field is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Please enter a valid email address",
+              },
+            })}
             className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
           />
+          {errors.email && (
+            <p className="text-error-red">{errors.email.message}</p>
+          )}
         </div>
         <div className="flex flex-col gap-4">
           <p className="flex gap-2">
@@ -101,6 +110,9 @@ const App = () => {
             <div className="w-5 h-5 rounded-full border-2 border-[#86A2A5]"></div>
             <span>Support Request</span>
           </label>
+          {errors.queryType && (
+            <p className="text-error-red">{errors.queryType.message}</p>
+          )}
         </div>
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
@@ -111,7 +123,7 @@ const App = () => {
               className="resize-none border border-[#86A2A5] rounded-lg h-60 px-6 py-3 outline-none"
               {...register("message", { required: "This field is required" })}
             ></textarea>
-            {errors.message?.message && (
+            {errors.message && (
               <p className="text-error-red">{errors.message.message}</p>
             )}
           </div>

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import clsx from "clsx";
 import RadioInput from "./components/RadioInput";
+import TextInput from "./components/TextInput";
 
 type ContactFormType = {
   firstName: string;
@@ -31,57 +31,37 @@ const App = () => {
         className="flex flex-col gap-6 leading-[150%]"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex flex-col gap-2 outline-0">
-          <label className="flex gap-2">
-            First Name <span className="text-green-600">*</span>
-          </label>
-          <input
-            type="text"
-            {...register("firstName", { required: "This field is required" })}
-            className={clsx(
-              "border border-[#86A2A5] px-6 py-3 rounded-lg outline-none cursor-pointer",
-              "focus:border-green-600",
-              errors.firstName && "border-error-red focus:border-error-red"
-            )}
-          />
-          {errors.firstName && (
-            <p className="text-error-red">{errors.firstName.message}</p>
-          )}
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="flex gap-2">
-            Last Name <span className="text-green-600">*</span>
-          </label>
-          <input
-            type="text"
-            {...register("lastName", {
-              required: "This field is required",
-            })}
-            className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
-          />
-          {errors.lastName && (
-            <p className="text-error-red">{errors.lastName.message}</p>
-          )}
-        </div>
-        <div className="flex flex-col gap-2">
-          <label className="flex gap-2">
-            Email Address <span className="text-green-600">*</span>
-          </label>
-          <input
-            type="email"
-            {...register("email", {
-              required: "This field is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Please enter a valid email address",
-              },
-            })}
-            className="border border-[#86A2A5] px-6 py-3 rounded-lg outline-none"
-          />
-          {errors.email && (
-            <p className="text-error-red">{errors.email.message}</p>
-          )}
-        </div>
+        <TextInput<ContactFormType>
+          name="firstName"
+          label="First Name"
+          register={register}
+          errors={errors}
+          rules={{ required: "This field is required" }}
+        />
+
+        <TextInput<ContactFormType>
+          name="lastName"
+          label="Last Name"
+          register={register}
+          errors={errors}
+          rules={{ required: "This field is required" }}
+        />
+
+        <TextInput<ContactFormType>
+          name="email"
+          label="Email Address"
+          type="email"
+          register={register}
+          errors={errors}
+          rules={{
+            required: "This field is required",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "Please enter a valid email address",
+            },
+          }}
+        />
+
         <div className="flex flex-col gap-4">
           <p className="flex gap-2">
             Query Type <span className="text-green-600">*</span>
@@ -105,6 +85,7 @@ const App = () => {
             <p className="text-error-red">{errors.queryType.message}</p>
           )}
         </div>
+
         <div className="flex flex-col gap-10">
           <div className="flex flex-col gap-2">
             <label className="flex gap-2">

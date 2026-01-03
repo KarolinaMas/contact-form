@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
+import RadioInput from "./components/RadioInput";
 
 type ContactFormType = {
   firstName: string;
@@ -86,50 +87,20 @@ const App = () => {
             Query Type <span className="text-green-600">*</span>
           </p>
 
-          <label className="cursor-pointer group">
-            <input
-              type="radio"
-              value="generalEnquiry"
-              {...register("queryType", {
-                required: "Please select a query type",
-              })}
-              className="peer hidden"
-            />
-            <div
-              className={clsx(
-                "border border-gray-500 px-6 py-3 rounded-lg text-lg flex items-center gap-3",
-                "peer-checked:bg-green-200 peer-checked:border-green-600"
-              )}
-            >
-              <div
-                className={clsx(
-                  "relative w-5 h-5 rounded-full border-2 border-[#86A2A5] shrink-0 ",
-                  "group-has-[input:checked]:border-green-600"
-                )}
-              >
-                <div
-                  className={clsx(
-                    "absolute inset-1 rounded-full bg-green-600 scale-0 transition-transform",
-                    "group-has-[input:checked]:scale-100"
-                  )}
-                />
-              </div>
-              <span>General Enquiry</span>
-            </div>
-          </label>
+          <RadioInput<ContactFormType>
+            name="queryType"
+            value="generalEnquiry"
+            label="General Enquiry"
+            register={register}
+          />
 
-          <label className="border border-[#86A2A5] px-6 py-3 rounded-lg text-lg flex items-center gap-3 cursor-pointer">
-            <input
-              type="radio"
-              value="supportRequest"
-              {...register("queryType", {
-                required: "Please select a query type",
-              })}
-              className="peer hidden"
-            />
-            <div className="w-5 h-5 rounded-full border-2 border-[#86A2A5]"></div>
-            <span>Support Request</span>
-          </label>
+          <RadioInput<ContactFormType>
+            name="queryType"
+            value="supportRequest"
+            label="Support Request"
+            register={register}
+          />
+
           {errors.queryType && (
             <p className="text-error-red">{errors.queryType.message}</p>
           )}

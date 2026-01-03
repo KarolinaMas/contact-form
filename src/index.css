@@ -4,7 +4,9 @@
 
 @theme {
   --color-green-600: #0c7d69;
+  --color-green-200: #e0f1e8;
   --color-error-red: #d73c3c;
+  --color-gray-500: #86a2a5;
 }
 
 body {

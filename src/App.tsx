@@ -38,8 +38,9 @@ const App = () => {
             type="text"
             {...register("firstName", { required: "This field is required" })}
             className={clsx(
-              "border border-[#86A2A5] px-6 py-3 rounded-lg outline-none",
-              errors.firstName && "border-error-red"
+              "border border-[#86A2A5] px-6 py-3 rounded-lg outline-none cursor-pointer",
+              "focus:border-green-600",
+              errors.firstName && "border-error-red focus:border-error-red"
             )}
           />
           {errors.firstName && (
@@ -85,7 +86,7 @@ const App = () => {
             Query Type <span className="text-green-600">*</span>
           </p>
 
-          <label className="border border-[#86A2A5] px-6 py-3 rounded-lg text-lg flex items-center gap-3 cursor-pointer">
+          <label className="cursor-pointer group">
             <input
               type="radio"
               value="generalEnquiry"
@@ -94,8 +95,27 @@ const App = () => {
               })}
               className="peer hidden"
             />
-            <div className="w-5 h-5 rounded-full border-2 border-[#86A2A5]"></div>
-            <span>General Enquiry</span>
+            <div
+              className={clsx(
+                "border border-gray-500 px-6 py-3 rounded-lg text-lg flex items-center gap-3",
+                "peer-checked:bg-green-200 peer-checked:border-green-600"
+              )}
+            >
+              <div
+                className={clsx(
+                  "relative w-5 h-5 rounded-full border-2 border-[#86A2A5] shrink-0 ",
+                  "group-has-[input:checked]:border-green-600"
+                )}
+              >
+                <div
+                  className={clsx(
+                    "absolute inset-1 rounded-full bg-green-600 scale-0 transition-transform",
+                    "group-has-[input:checked]:scale-100"
+                  )}
+                />
+              </div>
+              <span>General Enquiry</span>
+            </div>
           </label>
 
           <label className="border border-[#86A2A5] px-6 py-3 rounded-lg text-lg flex items-center gap-3 cursor-pointer">

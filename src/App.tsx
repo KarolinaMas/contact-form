@@ -3,6 +3,7 @@ import RadioInput from "./components/RadioInput";
 import TextInput from "./components/TextInput";
 import TextareaInput from "./components/TextareaInput";
 import CheckboxInput from "./components/CheckboxInput";
+import clsx from "clsx";
 
 type ContactFormType = {
   firstName: string;
@@ -108,7 +109,11 @@ const App = () => {
           />
 
           <button
-            className="text-white font-bold text-lg bg-green-600 py-4 rounded-lg cursor-pointer"
+            className={clsx(
+              "text-white font-bold text-lg bg-green-600 py-4 rounded-lg cursor-pointer",
+              "transition-colors duration-500 ease-in-out",
+              "hover:bg-green-900"
+            )}
             type="submit"
           >
             Submit

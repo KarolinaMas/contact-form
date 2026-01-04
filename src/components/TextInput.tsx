@@ -34,6 +34,7 @@ function TextInput<T extends FieldValues>({
         {...register(name, rules)}
         className={clsx(
           "border px-6 py-3 rounded-lg outline-none cursor-pointer",
+          "hover:border-green-600",
           errors?.[name]
             ? "border-error-red focus:border-error-red"
             : "border-gray-500 focus:border-green-600"

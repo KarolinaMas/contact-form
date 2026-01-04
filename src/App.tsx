@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import RadioInput from "./components/RadioInput";
 import TextInput from "./components/TextInput";
 import TextareaInput from "./components/TextareaInput";
+import CheckboxInput from "./components/CheckboxInput";
 
 type ContactFormType = {
   firstName: string;
@@ -95,21 +96,17 @@ const App = () => {
             errors={errors}
           />
 
-          <label className="flex items-center gap-4 pr-5 cursor-pointer">
-            <input
-              type="checkbox"
-              {...register("agreement", {
-                required:
-                  "To submit this form, please consent to being contacted",
-              })}
-              className="peer hidden"
-            />
-            <div className="w-4.5 h-4.5 shrink-0 flex items-center justify-center border-2 border-[#86A2A5] rounded-xs"></div>
-            <p>
-              I consent to being contacted by the team
-              <span className="text-green-600 pl-1">*</span>
-            </p>
-          </label>
+          <CheckboxInput
+            name="agreement"
+            label="I consent to being contacted by the team"
+            register={register}
+            errors={errors}
+            rules={{
+              required:
+                "To submit this form, please consent to being contacted",
+            }}
+          />
+
           <button
             className="text-white font-bold text-lg bg-green-600 py-4 rounded-lg cursor-pointer"
             type="submit"

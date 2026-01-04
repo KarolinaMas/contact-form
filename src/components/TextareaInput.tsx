@@ -11,7 +11,7 @@ type TextareaInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   register: UseFormRegister<T>;
-  errors: FieldErrors<T>;
+  errors?: FieldErrors<T>;
 };
 
 function TextareaInput<T extends FieldValues>({

@@ -1,44 +1,39 @@
 import type {
   UseFormRegister,
   FieldValues,
-  Path,
-  RegisterOptions,
   FieldErrors,
+  Path,
 } from "react-hook-form";
+
 import clsx from "clsx";
 
-type TextInputProps<T extends FieldValues> = {
+type TextareaInputProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
-  type?: string;
   register: UseFormRegister<T>;
-  errors?: FieldErrors<T>;
-  rules?: RegisterOptions<T>;
+  errors: FieldErrors<T>;
 };
 
-function TextInput<T extends FieldValues>({
+function TextareaInput<T extends FieldValues>({
   name,
   label,
-  type = "text",
   register,
   errors,
-  rules,
-}: TextInputProps<T>) {
+}: TextareaInputProps<T>) {
   return (
-    <div className="flex flex-col gap-2 outline-0">
+    <div className="flex flex-col gap-2">
       <label className="flex gap-2">
         {label} <span className="text-green-600">*</span>
       </label>
-      <input
-        type={type}
-        {...register(name, rules)}
+      <textarea
         className={clsx(
-          "border px-6 py-3 rounded-lg outline-none cursor-pointer",
+          "resize-none border rounded-lg h-60 px-6 py-3 outline-none",
           errors?.[name]
             ? "border-error-red focus:border-error-red"
             : "border-gray-500 focus:border-green-600"
         )}
-      />
+        {...register(name, { required: "This field is required" })}
+      ></textarea>
       {errors?.[name] && (
         <p className="text-error-red">{errors[name]?.message?.toString()}</p>
       )}
@@ -46,4 +41,4 @@ function TextInput<T extends FieldValues>({
   );
 }
 
-export default TextInput;
+export default TextareaInput;

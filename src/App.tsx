@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import RadioInput from "./components/RadioInput";
 import TextInput from "./components/TextInput";
+import TextareaInput from "./components/TextareaInput";
 
 type ContactFormType = {
   firstName: string;
@@ -87,18 +88,13 @@ const App = () => {
         </div>
 
         <div className="flex flex-col gap-10">
-          <div className="flex flex-col gap-2">
-            <label className="flex gap-2">
-              Message <span className="text-green-600">*</span>
-            </label>
-            <textarea
-              className="resize-none border border-[#86A2A5] rounded-lg h-60 px-6 py-3 outline-none"
-              {...register("message", { required: "This field is required" })}
-            ></textarea>
-            {errors.message && (
-              <p className="text-error-red">{errors.message.message}</p>
-            )}
-          </div>
+          <TextareaInput
+            name="message"
+            label="Message"
+            register={register}
+            errors={errors}
+          />
+
           <label className="flex items-center gap-4 pr-5 cursor-pointer">
             <input
               type="checkbox"

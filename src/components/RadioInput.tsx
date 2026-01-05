@@ -15,7 +15,7 @@ function RadioInput<T extends FieldValues>({
   register,
 }: RadioInputProps<T>) {
   return (
-    <label className="cursor-pointer group">
+    <label className="cursor-pointer group w-full">
       <input
         type="radio"
         value={value}
@@ -33,7 +33,7 @@ function RadioInput<T extends FieldValues>({
       >
         <div
           className={clsx(
-            "relative w-5 h-5 rounded-full border-2 border-[#86A2A5] shrink-0 ",
+            "relative w-5 h-5 rounded-full border-2 border-gray-500 shrink-0 ",
             "group-has-[input:checked]:border-green-600"
           )}
         >

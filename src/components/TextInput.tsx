@@ -25,7 +25,7 @@ function TextInput<T extends FieldValues>({
   rules,
 }: TextInputProps<T>) {
   return (
-    <div className="flex flex-col gap-2 outline-0">
+    <div className="flex flex-col gap-2 outline-0 w-full">
       <label className="flex gap-2">
         {label} <span className="text-green-600">*</span>
       </label>

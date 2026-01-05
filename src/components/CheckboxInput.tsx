@@ -33,7 +33,7 @@ function CheckboxInput<T extends FieldValues>({
         />
         <div
           className={clsx(
-            "w-4.5 h-4.5 shrink-0 flex items-center justify-center border-2 border-[#86A2A5] rounded-xs",
+            "w-4.5 h-4.5 shrink-0 flex items-center justify-center border-2 border-gray-500 rounded-xs",
             "peer-checked:bg-green-600 peer-checked:border-none"
           )}
         >

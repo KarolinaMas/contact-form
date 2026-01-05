@@ -30,7 +30,8 @@ const App = () => {
       <div
         className={clsx(
           "bg-white w-full shrink-0 flex flex-col gap-8 p-6 rounded-2xl text-gray-900",
-          "md:p-10 md:max-w-[690px]"
+          "md:p-10 md:max-w-[690px]",
+          "lg:max-w-3xl"
         )}
       >
         <h1 className="text-[2rem] font-bold leading-[100%] tracking-[-1px]">

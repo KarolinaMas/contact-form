@@ -29,6 +29,7 @@ function TextareaInput<T extends FieldValues>({
         className={clsx(
           "resize-none text-lg leading-[150%] border rounded-lg h-60 px-6 py-3 outline-none",
           "md:h-33",
+          "lg:h-26.25",
           errors?.[name]
             ? "border-error-red focus:border-error-red"
             : "border-gray-500 focus:border-green-600"

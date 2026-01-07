@@ -4,6 +4,8 @@ import TextInput from "./components/TextInput";
 import TextareaInput from "./components/TextareaInput";
 import CheckboxInput from "./components/CheckboxInput";
 import clsx from "clsx";
+import { useState } from "react";
+import MessageBox from "./components/MessageBox";
 
 type ContactFormType = {
   firstName: string;
@@ -21,12 +23,18 @@ const App = () => {
     formState: { errors },
   } = useForm<ContactFormType>();
 
+  const [isSent, setIsSent] = useState(true);
+
   console.log(errors);
 
-  const onSubmit = (formData: ContactFormType) => console.log(formData);
+  const onSubmit = (formData: ContactFormType) => {
+    console.log(formData);
+    setIsSent(true);
+  };
 
   return (
-    <div className="flex justify-center">
+    <div className="relative flex justify-center leading-[150%]">
+      {isSent && <MessageBox />}
       <div
         className={clsx(
           "bg-white w-full shrink-0 flex flex-col gap-8 p-6 rounded-2xl text-gray-900",
@@ -41,7 +49,7 @@ const App = () => {
           className="flex flex-col gap-6 leading-[150%]"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="flex flex-col gap-6 md:flex-row md:gap-4">
+          <div className="flex flex-col gap-6 sm:flex-row sm:gap-4">
             <TextInput<ContactFormType>
               name="firstName"
               label="First Name"
@@ -78,7 +86,7 @@ const App = () => {
             <p className="flex gap-2">
               Query Type <span className="text-green-600">*</span>
             </p>
-            <div className="flex flex-col gap-4 md:flex-row">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <RadioInput<ContactFormType>
                 name="queryType"
                 value="generalEnquiry"

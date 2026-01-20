@@ -4,7 +4,7 @@ import TextInput from "./components/TextInput";
 import TextareaInput from "./components/TextareaInput";
 import CheckboxInput from "./components/CheckboxInput";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MessageBox from "./components/MessageBox";
 
 type ContactFormType = {
@@ -33,6 +33,15 @@ const App = () => {
     setIsSent(true);
     reset();
   };
+
+  useEffect(() => {
+    if (!isSent) return;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [isSent]);
 
   return (
     <div className="relative flex justify-center leading-[150%] px-4 py-8 sm:py-32">

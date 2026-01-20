@@ -21,25 +21,29 @@ const App = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<ContactFormType>();
 
-  const [isSent, setIsSent] = useState(true);
+  const [isSent, setIsSent] = useState(false);
 
   console.log(errors);
 
   const onSubmit = (formData: ContactFormType) => {
     console.log(formData);
     setIsSent(true);
+    reset();
   };
 
   return (
-    <div className="relative flex justify-center leading-[150%]">
-      {isSent && <MessageBox />}
+    <div className="relative flex justify-center leading-[150%] px-4 py-8 sm:py-32">
+      {isSent && (
+        <MessageBox isSent={isSent} onReset={() => setIsSent(false)} />
+      )}
       <div
         className={clsx(
           "bg-white w-full shrink-0 flex flex-col gap-8 p-6 rounded-2xl text-gray-900",
           "md:p-10 md:max-w-[690px]",
-          "lg:max-w-3xl"
+          "lg:max-w-3xl",
         )}
       >
         <h1 className="text-[2rem] font-bold leading-[100%] tracking-[-1px]">
@@ -130,7 +134,7 @@ const App = () => {
               className={clsx(
                 "text-white font-bold text-lg bg-green-600 py-4 rounded-lg cursor-pointer",
                 "transition-colors duration-500 ease-in-out",
-                "hover:bg-green-900"
+                "hover:bg-green-900",
               )}
               type="submit"
             >

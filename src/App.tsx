@@ -11,7 +11,7 @@ type ContactFormType = {
   firstName: string;
   lastName: string;
   email: string;
-  queryType: boolean;
+  queryType: "generalEnquiry" | "supportRequest";
   message: string;
   agreement: boolean;
 };
@@ -22,7 +22,7 @@ const App = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<ContactFormType>();
+  } = useForm<ContactFormType>({ mode: "onBlur" });
 
   const [isSent, setIsSent] = useState(false);
 
@@ -105,6 +105,9 @@ const App = () => {
                 value="generalEnquiry"
                 label="General Enquiry"
                 register={register}
+                rules={{
+                  required: "Please select a query type",
+                }}
               />
 
               <RadioInput<ContactFormType>
@@ -112,6 +115,9 @@ const App = () => {
                 value="supportRequest"
                 label="Support Request"
                 register={register}
+                rules={{
+                  required: "Please select a query type",
+                }}
               />
             </div>
 

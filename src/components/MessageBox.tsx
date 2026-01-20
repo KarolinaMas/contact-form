@@ -32,7 +32,7 @@ function MessageBox({ isSent, onReset }: MessageBoxProp) {
       className={clsx(
         "absolute bg-gray-900 p-6 m-6 top-0 rounded-xl max-w-81.75",
         "transform transition-all duration-3000 ease-out",
-        visible ? "opacity-100 traslate-y-0" : "opacity-0 -translate-y-2",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2",
         "sm:max-w-112.5",
       )}
     >

@@ -29,6 +29,8 @@ function MessageBox({ isSent, onReset }: MessageBoxProp) {
 
   return (
     <div
+      role="status"
+      aria-live="polite"
       className={clsx(
         "absolute bg-gray-900 p-6 m-6 top-0 rounded-xl max-w-81.75",
         "transform transition-all duration-3000 ease-out",

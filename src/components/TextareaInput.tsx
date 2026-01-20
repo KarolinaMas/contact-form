@@ -20,24 +20,32 @@ function TextareaInput<T extends FieldValues>({
   register,
   errors,
 }: TextareaInputProps<T>) {
+  const errorId = `${name}-error`;
+  const hasError = !!errors?.[name];
+
   return (
     <div className="flex flex-col gap-2">
-      <label className="flex gap-2">
+      <label htmlFor={name} className="flex gap-2">
         {label} <span className="text-green-600">*</span>
       </label>
       <textarea
+        id={name}
+        aria-invalid={hasError}
+        aria-describedby={hasError ? errorId : undefined}
         className={clsx(
           "resize-none text-lg leading-[150%] border rounded-lg h-60 px-6 py-3 outline-none",
           "md:h-33",
           "lg:h-26.25",
-          errors?.[name]
+          hasError
             ? "border-error-red focus:border-error-red"
-            : "border-gray-500 focus:border-green-600"
+            : "border-gray-500 focus:border-green-600",
         )}
         {...register(name, { required: "This field is required" })}
       ></textarea>
-      {errors?.[name] && (
-        <p className="text-error-red">{errors[name]?.message?.toString()}</p>
+      {hasError && (
+        <p id={errorId} className="text-error-red">
+          {errors[name]?.message?.toString()}
+        </p>
       )}
     </div>
   );

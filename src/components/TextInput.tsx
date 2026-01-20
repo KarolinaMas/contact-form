@@ -24,24 +24,32 @@ function TextInput<T extends FieldValues>({
   errors,
   rules,
 }: TextInputProps<T>) {
+  const errorId = `${name}-error`;
+  const hasError = !!errors?.[name];
+
   return (
     <div className="flex flex-col gap-2 outline-0 w-full">
-      <label className="flex gap-2">
+      <label htmlFor={name} className="flex gap-2">
         {label} <span className="text-green-600">*</span>
       </label>
       <input
+        id={name}
         type={type}
+        aria-invalid={hasError}
+        aria-describedby={hasError ? errorId : undefined}
         {...register(name, rules)}
         className={clsx(
           "border px-6 py-3 rounded-lg outline-none cursor-pointer",
           "hover:border-green-600",
-          errors?.[name]
+          hasError
             ? "border-error-red focus:border-error-red"
-            : "border-gray-500 focus:border-green-600"
+            : "border-gray-500 focus:border-green-600",
         )}
       />
-      {errors?.[name] && (
-        <p className="text-error-red">{errors[name]?.message?.toString()}</p>
+      {hasError && (
+        <p id={errorId} className="text-error-red">
+          {errors[name]?.message?.toString()}
+        </p>
       )}
     </div>
   );

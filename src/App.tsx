@@ -22,7 +22,17 @@ const App = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    setFocus,
   } = useForm<ContactFormType>({ mode: "onBlur" });
+
+  useEffect(() => {
+    const firstError = Object.keys(errors)[0] as
+      | keyof ContactFormType
+      | undefined;
+    if (firstError) {
+      setFocus(firstError);
+    }
+  }, [errors, setFocus]);
 
   const [isSent, setIsSent] = useState(false);
 
@@ -95,10 +105,10 @@ const App = () => {
             }}
           />
 
-          <div className="flex flex-col gap-4">
-            <p className="flex gap-2">
+          <fieldset>
+            <legend className="flex gap-2 mb-2">
               Query Type <span className="text-green-600">*</span>
-            </p>
+            </legend>
             <div className="flex flex-col gap-4 sm:flex-row">
               <RadioInput<ContactFormType>
                 name="queryType"
@@ -122,9 +132,11 @@ const App = () => {
             </div>
 
             {errors.queryType && (
-              <p className="text-error-red">{errors.queryType.message}</p>
+              <p id={"queryType-error"} className="text-error-red">
+                {errors.queryType.message}
+              </p>
             )}
-          </div>
+          </fieldset>
 
           <div className="flex flex-col gap-10">
             <TextareaInput

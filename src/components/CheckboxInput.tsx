@@ -23,29 +23,45 @@ function CheckboxInput<T extends FieldValues>({
   errors,
   rules,
 }: CheckboxInput<T>) {
+  const errorId = `${name}-error`;
+  const hasError = !!errors?.[name];
+
   return (
     <div className="flex flex-col gap-2">
-      <label className="flex items-center gap-4 pr-5 cursor-pointer">
+      <label
+        htmlFor={name}
+        className="flex items-center gap-4 pr-5 cursor-pointer"
+      >
         <input
+          id={name}
           type="checkbox"
+          aria-invalid={hasError}
+          aria-describedby={hasError ? errorId : undefined}
           {...register(name, rules)}
-          className="peer hidden"
+          className="peer sr-only"
         />
+
         <div
           className={clsx(
-            "w-4.5 h-4.5 shrink-0 flex items-center justify-center border-2 border-gray-500 rounded-xs",
-            "peer-checked:bg-green-600 peer-checked:border-none"
+            "w-4.5 h-4.5 flex items-center justify-center border-2 rounded-xs",
+            "border-gray-500",
+            "peer-checked:bg-green-600 peer-checked:border-none",
+            "peer-focus-visible:ring-2 peer-focus-visible:ring-green-600",
           )}
         >
           <FaCheck className="text-white w-3 h-3" />
         </div>
-        <p>
+
+        <span>
           {label}
           <span className="text-green-600 pl-1">*</span>
-        </p>
+        </span>
       </label>
-      {errors?.[name] && (
-        <p className="text-error-red">{errors?.[name]?.message?.toString()}</p>
+
+      {hasError && (
+        <p id={errorId} className="text-error-red">
+          {errors?.[name]?.message?.toString()}
+        </p>
       )}
     </div>
   );

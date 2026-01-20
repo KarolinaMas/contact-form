@@ -26,14 +26,17 @@ function RadioInput<T extends FieldValues>({
       <input
         type="radio"
         value={value}
+        aria-describedby="queryType-error"
         {...register(name, rules)}
-        className="peer hidden"
+        className="peer sr-only"
       />
       <div
         className={clsx(
           "border border-gray-500 px-6 py-3 rounded-lg text-lg flex items-center gap-3",
           "peer-checked:bg-green-200 peer-checked:border-green-600",
           "hover:border-green-600",
+          "peer-focus:ring-2 peer-focus:ring-green-600",
+          "peer-focus-visible:ring-2 peer-focus-visible:ring-green-600",
         )}
       >
         <div

@@ -36,10 +36,7 @@ const App = () => {
 
   const [isSent, setIsSent] = useState(false);
 
-  console.log(errors);
-
   const onSubmit = (formData: ContactFormType) => {
-    console.log(formData);
     setIsSent(true);
     reset();
   };

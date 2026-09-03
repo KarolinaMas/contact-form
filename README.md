@@ -3,6 +3,9 @@
 An accessible, fully validated contact form — built from a [Frontend Mentor](https://www.frontendmentor.io/) challenge, matched pixel-for-pixel to the provided Figma design.
  
 🔗 **[Live demo](https://karolinamas.github.io/contact-form/)**
+
+## Screenshot
+![Contact form](screenshots/full-view-tablet.png)
  
 ## The challenge
  
